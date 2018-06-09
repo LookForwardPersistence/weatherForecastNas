@@ -1,14 +1,14 @@
 "user strict"
 
- var  contractAddress = "n1g8S8DRc9Jzw9exLu36MWTaEwq33iZHzit";//测试智能合约地址
+// var  contractAddress = "n1g8S8DRc9Jzw9exLu36MWTaEwq33iZHzit";//测试智能合约地址
 
-//var  contractAddress ="n1qqiYw1pse9gVWT1dPsjSwXYcyNNatVMqK";//正式合约地址
+var  contractAddress ="n1qqiYw1pse9gVWT1dPsjSwXYcyNNatVMqK";//正式合约地址
 var nebulas = require('nebulas'),
     account = nebulas.Account,
     neb = new nebulas.Neb();
 
- neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));//测网
-//neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));// 主网
+// neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));//测网
+neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));// 主网
 
 function isArray(obj) {
     return (typeof obj =='object')&&obj.constructor == Array;
@@ -24,4 +24,8 @@ function  getQueryString() {
     }else {
         return null;
     }
+}
+
+var opts = {
+    listener:undefined
 }

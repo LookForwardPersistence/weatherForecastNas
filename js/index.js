@@ -13,7 +13,7 @@ var cityName;
 currentCity.get(getCityFun);
 function getCityFun(res) {
     cityName =res.name.replace("市","");
-    document.getElementById("cityNameId").value = cityName;
+    // document.getElementById("cityNameId").value = cityName;
 }
 
 //加载当前城市天气
@@ -100,28 +100,36 @@ var intervalCount=0;
 document.getElementById("searchId").addEventListener("click",function () {
   var name = document.getElementById("cityNameId").value;
   if(!name){
-      alert("请输入城市");
+      alert("请输入城市名称");
       return;
   }
-  var to = contractAddress;
-  var value = 0;
-  var curDate = getCurDate();
-  var callFun = "saveWeather";
-  var callArgs = "[\""+name+"\",\""+curDate+"\"]";
-  serialNumber = nebPay.call(to,value,callFun,callArgs,{
-      listener: callBackFun
-  });
-    // getResult();
- setInterval(function () { //心跳 5s查询是否成功
-     getResult();
-     intervalCount++
- }, 5000)
+    executeContract();
+
 })
 //交易处理返回信息
 function callBackFun(res) {
+    console.log("cb");
+    console.log(res)
     console.log("response :" + JSON.stringify(res));
 }
 
+function executeContract() {
+    var to = contractAddress;
+    var value = 0;
+    var curDate = getCurDate();
+    var callFun = "saveWeather";
+    var callArgs = "[\""+name+"\",\""+curDate+"\"]";
+    opts.listener = function(data){
+        if(typeof data === "object"){
+            console.log("You are success!")
+            actionSearch();
+        }else{
+            console.log("失败")
+            console.log(data)
+        }
+    };
+    nebPay.call(to,value,callFun,callArgs,opts);
+}
 //检查返回状态
 function getResult() {
         nebPay.queryPayInfo(serialNumber).then(
@@ -132,6 +140,7 @@ function getResult() {
                 if(result.data.status === 1){
                         actionSearch();
                 }else {
+                    // alert("支付失败")
                     console.log(result)
                 }
             }
@@ -144,7 +153,7 @@ document.getElementById("cityNameId").addEventListener("keypress", function(e) {
     if(!e) e = event;
     keyCode = e.keyCode || e.which || e.charCode;
     if(keyCode == 13) {
-     actionSearch();
+        executeContract();
     }
 });
 //获取当前日期
