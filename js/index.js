@@ -132,7 +132,7 @@ function getResult() {
                 if(result.data.status === 1){
                         actionSearch();
                 }else {
-                    alert("支付失败")
+                    console.log(result)
                 }
             }
         )
