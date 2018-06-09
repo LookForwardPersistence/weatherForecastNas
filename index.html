@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星云看天气</title>
+</head>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<body>
+<div>
+    <selection class="header-box">
+        <div class="icon-box">
+            <img src="images/logo.png" class="img-logo"/>
+            <span>星云看天气</span>
+        </div>
+        <div class="input-box">
+            <input class="input-medium search-query" style="border-radius: 5px" id="cityNameId"  placeholder="请输入城市名">
+            </input>
+            <button id="searchId" class="btn btn-success">搜索</button>
+        </div>
+    </selection>
+    <section class="main-box">
+        <div class="air-box" id="curWeatherId">
+           <!-- <img class="icon-air" />
+            <img class="icon-air1" />
+            <p class="air-time"><span>{{currData.days}}</span><span>{{currData.week}}</span></p>
+            <p class="air-num">{{currData.temp_high}}<i>℃</i></p>
+            <P class="air-weather">{{currData.weather}}</P>
+            <b class="air-city">{{currData.citynm}}</b>
+            <ul class="air-info">
+                <li>{{currData.winp}}</li>
+                <li>{{currData.temperature}}</li>
+            </ul>-->
+        </div>
+        <div class="tip-box">
+            <div class="air-trend">
+                <div class="air-trend-ctn" style="color:white;">
+                    <div class="chart" id="gotobedbar" style="color:white; "></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="week-box" id="weekWeatherId">
+      <!--  <div class="date-box" v-for="em in weekData">
+            <img :src=em.weather_icon class="date-icon" />
+            <ul class="air-info-date">
+                <li>{{em.weather}}</li>
+                <li>{{em.winp}}</li>
+                <li>{{em.temperature}}</li>
+                <li>{{em.days}}</li>
+                <li>{{em.week}}</li>
+            </ul>
+        </div>-->
+    </section>
+    <section class="bottom-box">
+        <span>Copyright © 2018-2019 fqhua_5@sina.cn</span>
+    </section>
+</div>
+<script src="js/nebPay.js"></script>
+<script src="js/nebulas.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=A63e90def3d0f5488ab9032056429a0d"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="lib/echarts/echarts.js"></script>
+<script src="lib/echarts/macarons.js"></script>
+<script src="js/main_pub.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
