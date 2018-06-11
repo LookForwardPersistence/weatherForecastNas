@@ -176,7 +176,7 @@ function getCurDate() {
 function draw(id,xData,dayData,nightData) {
     var o = document.getElementById(id);
     var height = document.documentElement.clientHeight;
-    height -= 330;
+    height -= 400;
     o.style.height= height+"px";
 
     this.chart = echarts.init(o,'macarons');
