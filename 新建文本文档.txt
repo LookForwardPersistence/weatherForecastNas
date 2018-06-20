@@ -1,0 +1,71 @@
+JS分享到微博,qq空间,人人,微信等
+2016年11月04日 23:27:40
+阅读数：2404
+(一)html代码结构如下
+<div class="float-share">
+<ul>
+    <li class="share-title">分享到</li>
+    <li class="share-con clearfix bdsharebuttonbox">
+        <div class="share-way wechat" onclick="weixin()">  
+            <a href="javascript:void(0);" class="bds_weixin" data-cmd="weixin" title="分享到微信" ></a> 
+            <div class="txt">微信</div> 
+        </div>
+        <div class="share-way Qzone"> 
+            <a href="javascript:void(0);" onClick="javascript:Share('qzone')" class="bds_qzone" title="QQ空间"></a>
+            <div class="txt">QQ空间</div>
+        </div>
+        <div class="share-way weibo" >
+            <a href="javascript:void(0);" onclick="javascript:Share('sina')" class="sina" title="分享到新浪微博"></a> 
+            <div class="txt">新浪微博</div>
+        </div> 
+        <div class="share-way weibo" >
+            <a href="javascript:void(0);" onclick="javascript:Share('ren')" class="sina" title="分享到人人网"></a> 
+            <div class="txt">人人网</div>
+        </div> 
+    </li>
+</ul>
+</div>
+(二)js代码如下
+ function Share(pType){
+        var pTitle = ""; //待分享的标题
+        var pImage = ""; //待分享的图片
+        var pContent = ""; //待分享的内容
+        var pUrl = window.location.href; //当前的url地址
+        var pObj = jQuery("div[class='yogo_hc']").find("h4");
+        if(pObj.length){
+            pTitle = pObj.text();
+        }
+        var pObj = jQuery("div[class='yogo_hcs']").find("em");
+        if(pObj.length){
+            pContent = pObj.text();
+        }
+       var pObj = jQuery("div[class='con_cons']").find("img");
+       if(pObj.length){
+           pImage = jQuery("div[class='con_cons']").find("img",0).attr("src");
+       }
+        shareys(pType, pUrl, pTitle, "", pContent);
+    }
+//以下shareys是主要的分享的api接口
+function shareys(type, url, title, img, content){
+  switch (type) {
+      case "sina":
+          url = "http://service.weibo.com/share/share.php?title=" + encodeURIComponent(content + '「' + title + '」' + ' 点这里' + url) + '&pic=' + img;
+          window.open(url);
+          break;
+      case "tqq":
+          url = "http://share.v.t.qq.com/index.php?c=share&a=index&url=" + encodeURIComponent(url) + '&title=' + encodeURIComponent(title) + '&pic=' + img;
+          window.open(url);
+          break;
+      case "qzone":
+           url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title) + '&site=&pics=' + encodeURIComponent(img) + '&desc=' + encodeURIComponent(content) +'&summary=' + encodeURIComponent(content);
+          window.open(url);
+          break;
+      case "ren":
+          url = 'http://widget.renren.com/dialog/share?resourceUrl=' + encodeURIComponent(url) + '&srcUrl=' + img + '&title=' + encodeURIComponent(title);
+          +'&description=' + content;
+          window.open(url);
+          break;
+      default:
+          break;
+  }
+}
